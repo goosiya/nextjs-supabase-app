@@ -34,6 +34,8 @@ const config = {
     'subject-full-stop': [2, 'never', '.'],
     // 빈 body 허용
     'body-leading-blank': [1, 'always'],
+    // 한국어/대문자 고유명사 허용 (OAuth, API 등)
+    'subject-case': [0],
   },
 }
 
