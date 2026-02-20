@@ -1,52 +1,40 @@
-"use client";
+'use client'
 
-import { cn } from "@/lib/utils";
-import { createClient } from "@/lib/supabase/client";
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { useState } from "react";
-import type { Profile } from "@/types/database.types";
+import { cn } from '@/lib/utils'
+import { createClient } from '@/lib/supabase/client'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { Textarea } from '@/components/ui/textarea'
+import { useState } from 'react'
+import type { Profile } from '@/types/database.types'
 
-interface ProfileFormProps extends React.ComponentPropsWithoutRef<"div"> {
-  userId: string;
-  userEmail: string;
-  profile: Profile | null;
+interface ProfileFormProps extends React.ComponentPropsWithoutRef<'div'> {
+  userId: string
+  userEmail: string
+  profile: Profile | null
 }
 
-export function ProfileForm({
-  userId,
-  userEmail,
-  profile,
-  className,
-  ...props
-}: ProfileFormProps) {
-  const [username, setUsername] = useState(profile?.username ?? "");
-  const [fullName, setFullName] = useState(profile?.full_name ?? "");
-  const [website, setWebsite] = useState(profile?.website ?? "");
-  const [bio, setBio] = useState(profile?.bio ?? "");
-  const [error, setError] = useState<string | null>(null);
-  const [message, setMessage] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
+export function ProfileForm({ userId, userEmail, profile, className, ...props }: ProfileFormProps) {
+  const [username, setUsername] = useState(profile?.username ?? '')
+  const [fullName, setFullName] = useState(profile?.full_name ?? '')
+  const [website, setWebsite] = useState(profile?.website ?? '')
+  const [bio, setBio] = useState(profile?.bio ?? '')
+  const [error, setError] = useState<string | null>(null)
+  const [message, setMessage] = useState<string | null>(null)
+  const [isLoading, setIsLoading] = useState(false)
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const supabase = createClient();
-    setIsLoading(true);
-    setError(null);
-    setMessage(null);
+    e.preventDefault()
+    const supabase = createClient()
+    setIsLoading(true)
+    setError(null)
+    setMessage(null)
 
     try {
       const { error } = await supabase
-        .from("profiles")
+        .from('profiles')
         .update({
           username: username || null,
           full_name: fullName || null,
@@ -54,25 +42,23 @@ export function ProfileForm({
           bio: bio || null,
           updated_at: new Date().toISOString(),
         })
-        .eq("id", userId);
+        .eq('id', userId)
 
-      if (error) throw error;
-      setMessage("프로필이 저장되었습니다.");
+      if (error) throw error
+      setMessage('프로필이 저장되었습니다.')
     } catch (error: unknown) {
-      setError(error instanceof Error ? error.message : "오류가 발생했습니다.");
+      setError(error instanceof Error ? error.message : '오류가 발생했습니다.')
     } finally {
-      setIsLoading(false);
+      setIsLoading(false)
     }
-  };
+  }
 
   return (
-    <div className={cn("flex flex-col gap-6", className)} {...props}>
+    <div className={cn('flex flex-col gap-6', className)} {...props}>
       <Card>
         <CardHeader>
           <CardTitle className="text-2xl">프로필 정보</CardTitle>
-          <CardDescription>
-            이메일: {userEmail}
-          </CardDescription>
+          <CardDescription>이메일: {userEmail}</CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit}>
@@ -121,12 +107,12 @@ export function ProfileForm({
               {error && <p className="text-sm text-red-500">{error}</p>}
               {message && <p className="text-sm text-green-600">{message}</p>}
               <Button type="submit" className="w-full" disabled={isLoading}>
-                {isLoading ? "저장 중..." : "프로필 저장"}
+                {isLoading ? '저장 중...' : '프로필 저장'}
               </Button>
             </div>
           </form>
         </CardContent>
       </Card>
     </div>
-  );
+  )
 }

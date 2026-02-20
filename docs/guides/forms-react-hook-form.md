@@ -88,11 +88,11 @@ export const registerSchema = z
     email: emailSchema,
     password: passwordSchema,
     confirmPassword: z.string(),
-    terms: z.boolean().refine(val => val === true, {
+    terms: z.boolean().refine((val) => val === true, {
       message: '이용약관에 동의해주세요',
     }),
   })
-  .refine(data => data.password === data.confirmPassword, {
+  .refine((data) => data.password === data.confirmPassword, {
     message: '비밀번호가 일치하지 않습니다',
     path: ['confirmPassword'],
   })
@@ -151,11 +151,7 @@ async function hashPassword(password: string) {
   return `hashed_${password}`
 }
 
-async function createUser(userData: {
-  name: string
-  email: string
-  password: string
-}) {
+async function createUser(userData: { name: string; email: string; password: string }) {
   // TODO: 실제 데이터베이스에 사용자 생성
   const newUser = {
     id: Date.now().toString(),
@@ -1332,11 +1328,7 @@ import { headers } from 'next/headers'
 
 const rateLimitMap = new Map<string, { count: number; lastReset: number }>()
 
-export async function checkRateLimit(
-  identifier: string,
-  limit = 5,
-  window = 60000
-) {
+export async function checkRateLimit(identifier: string, limit = 5, window = 60000) {
   const now = Date.now()
   const record = rateLimitMap.get(identifier)
 

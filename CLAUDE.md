@@ -12,6 +12,7 @@ npm run lint     # ESLint 실행
 ```
 
 shadcn/ui 컴포넌트 추가:
+
 ```bash
 npx shadcn@latest add [component-name]
 ```
@@ -19,6 +20,7 @@ npx shadcn@latest add [component-name]
 ## 환경변수 설정
 
 `.env.local` 파일에 다음 변수가 필요합니다:
+
 ```
 NEXT_PUBLIC_SUPABASE_URL=...
 NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=...
@@ -44,6 +46,7 @@ NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=...
 ### 데이터베이스 타입
 
 `types/database.types.ts`에 Supabase 스키마 타입이 정의되어 있습니다. 현재 `instruments` 테이블과 `profiles` 테이블이 있습니다. 타입이 변경될 경우 Supabase CLI로 재생성:
+
 ```bash
 npx supabase gen types typescript --project-id [project-id] > types/database.types.ts
 ```
@@ -71,6 +74,7 @@ npx supabase gen types typescript --project-id [project-id] > types/database.typ
 ### Next.js 15 비동기 API
 
 `params`, `searchParams`, `cookies()`, `headers()`는 모두 비동기로 처리:
+
 ```tsx
 export default async function Page({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
@@ -98,6 +102,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 ## 참고 문서
 
 `docs/guides/` 에 상세 가이드가 있습니다:
+
 - `project-structure.md`: 폴더 구조 및 네이밍 컨벤션
 - `component-patterns.md`: 컴포넌트 설계 패턴
 - `nextjs-15.md`: Next.js 15 필수 규칙

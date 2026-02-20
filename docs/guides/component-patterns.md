@@ -18,14 +18,7 @@ export function UserAvatar({ user, size = 'md' }) {
 }
 
 export function UserStatus({ isOnline }) {
-  return (
-    <div
-      className={cn(
-        'h-3 w-3 rounded-full',
-        isOnline ? 'bg-green-500' : 'bg-gray-400'
-      )}
-    />
-  )
+  return <div className={cn('h-3 w-3 rounded-full', isOnline ? 'bg-green-500' : 'bg-gray-400')} />
 }
 
 // ❌ 여러 책임이 섞인 컴포넌트
@@ -94,7 +87,7 @@ export default async function UserListPage() {
 async function UserList({ users }) {
   return (
     <div className="grid gap-4">
-      {users.map(user => (
+      {users.map((user) => (
         <UserCard key={user.id} user={user} />
       ))}
     </div>
@@ -119,7 +112,7 @@ export function UserSearchForm() {
     <div>
       <input
         value={query}
-        onChange={e => setQuery(e.target.value)}
+        onChange={(e) => setQuery(e.target.value)}
         placeholder="사용자 검색..."
       />
       <SearchResults results={results} />
@@ -181,13 +174,7 @@ export function ProductInteractions({ productId }) {
 // ✅ 명확한 Props 타입 정의
 interface ButtonProps {
   children: React.ReactNode
-  variant?:
-    | 'default'
-    | 'destructive'
-    | 'outline'
-    | 'secondary'
-    | 'ghost'
-    | 'link'
+  variant?: 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link'
   size?: 'default' | 'sm' | 'lg' | 'icon'
   disabled?: boolean
   loading?: boolean
@@ -261,11 +248,7 @@ export function Text<T extends React.ElementType = 'p'>({
 // ✅ Render Props 패턴
 interface DataFetcherProps<T> {
   url: string
-  children: (
-    data: T | null,
-    loading: boolean,
-    error: Error | null
-  ) => React.ReactNode
+  children: (data: T | null, loading: boolean, error: Error | null) => React.ReactNode
 }
 
 export function DataFetcher<T>({ url, children }: DataFetcherProps<T>) {
@@ -301,40 +284,31 @@ export function DataFetcher<T>({ url, children }: DataFetcherProps<T>) {
 import { cva, type VariantProps } from 'class-variance-authority'
 
 // ✅ CVA로 변형 정의
-const cardVariants = cva(
-  'rounded-lg border bg-card text-card-foreground shadow-sm',
-  {
-    variants: {
-      variant: {
-        default: 'border-border',
-        outline: 'border-2',
-        ghost: 'border-transparent shadow-none',
-      },
-      size: {
-        sm: 'p-4',
-        md: 'p-6',
-        lg: 'p-8',
-      },
+const cardVariants = cva('rounded-lg border bg-card text-card-foreground shadow-sm', {
+  variants: {
+    variant: {
+      default: 'border-border',
+      outline: 'border-2',
+      ghost: 'border-transparent shadow-none',
     },
-    defaultVariants: {
-      variant: 'default',
-      size: 'md',
+    size: {
+      sm: 'p-4',
+      md: 'p-6',
+      lg: 'p-8',
     },
-  }
-)
+  },
+  defaultVariants: {
+    variant: 'default',
+    size: 'md',
+  },
+})
 
 interface CardProps extends VariantProps<typeof cardVariants> {
   children: React.ReactNode
   className?: string
 }
 
-export function Card({
-  variant,
-  size,
-  className,
-  children,
-  ...props
-}: CardProps) {
+export function Card({ variant, size, className, children, ...props }: CardProps) {
   return (
     <div className={cn(cardVariants({ variant, size }), className)} {...props}>
       {children}
@@ -358,7 +332,7 @@ export function Accordion({ children, type = 'single' }) {
   const [openItems, setOpenItems] = useState<Set<string>>(new Set())
 
   const toggle = (value: string) => {
-    setOpenItems(prev => {
+    setOpenItems((prev) => {
       const newSet = new Set(prev)
       if (newSet.has(value)) {
         newSet.delete(value)
@@ -425,7 +399,7 @@ export const ExpensiveComponent = memo(function ExpensiveComponent({
 }) {
   // 복잡한 계산을 메모이제이션
   const processedData = useMemo(() => {
-    return data.map(item => ({
+    return data.map((item) => ({
       ...item,
       calculated: expensiveCalculation(item),
     }))
@@ -441,7 +415,7 @@ export const ExpensiveComponent = memo(function ExpensiveComponent({
 
   return (
     <div>
-      {processedData.map(item => (
+      {processedData.map((item) => (
         <ExpensiveItem key={item.id} item={item} onUpdate={handleUpdate} />
       ))}
     </div>
@@ -487,11 +461,7 @@ interface VirtualizedListProps {
   height: number
 }
 
-export function VirtualizedList({
-  items,
-  itemHeight,
-  height,
-}: VirtualizedListProps) {
+export function VirtualizedList({ items, itemHeight, height }: VirtualizedListProps) {
   const Row = ({ index, style }) => (
     <div style={style}>
       <ListItem item={items[index]} />
@@ -532,15 +502,13 @@ export function Select<T>({
   return (
     <select
       value={value ? getValue(value) : ''}
-      onChange={e => {
-        const selectedValue = options.find(
-          option => getValue(option) === e.target.value
-        )
+      onChange={(e) => {
+        const selectedValue = options.find((option) => getValue(option) === e.target.value)
         if (selectedValue) onChange(selectedValue)
       }}
       className={className}
     >
-      {options.map(option => (
+      {options.map((option) => (
         <option key={getValue(option)} value={getValue(option)}>
           {getLabel(option)}
         </option>
@@ -554,8 +522,8 @@ export function Select<T>({
   options={users}
   value={selectedUser}
   onChange={setSelectedUser}
-  getLabel={user => user.name}
-  getValue={user => user.id}
+  getLabel={(user) => user.name}
+  getValue={(user) => user.id}
 />
 ```
 
@@ -574,11 +542,7 @@ export function Button<T extends boolean = false>(props: ButtonProps<T>) {
   const { children, loading, onClick, disabled, ...restProps } = props
 
   return (
-    <button
-      onClick={loading ? undefined : onClick}
-      disabled={disabled || loading}
-      {...restProps}
-    >
+    <button onClick={loading ? undefined : onClick} disabled={disabled || loading} {...restProps}>
       {loading ? <Spinner /> : children}
     </button>
   )
@@ -594,7 +558,7 @@ export function Button<T extends boolean = false>(props: ButtonProps<T>) {
 function useToggle(initialValue: boolean = false) {
   const [value, setValue] = useState(initialValue)
 
-  const toggle = useCallback(() => setValue(prev => !prev), [])
+  const toggle = useCallback(() => setValue((prev) => !prev), [])
   const setTrue = useCallback(() => setValue(true), [])
   const setFalse = useCallback(() => setValue(false), [])
 
@@ -651,11 +615,7 @@ const CartContext = createContext<{
 export function CartProvider({ children }) {
   const [state, dispatch] = useReducer(cartReducer, { items: [], total: 0 })
 
-  return (
-    <CartContext.Provider value={{ state, dispatch }}>
-      {children}
-    </CartContext.Provider>
-  )
+  return <CartContext.Provider value={{ state, dispatch }}>{children}</CartContext.Provider>
 }
 
 export function useCart() {
