@@ -14,6 +14,113 @@ export type Database = {
   }
   public: {
     Tables: {
+      event_participants: {
+        Row: {
+          attended: boolean | null
+          created_at: string | null
+          event_id: string
+          guest_name: string | null
+          guest_phone: string | null
+          id: string
+          note: string | null
+          status: string | null
+          user_id: string | null
+        }
+        Insert: {
+          attended?: boolean | null
+          created_at?: string | null
+          event_id: string
+          guest_name?: string | null
+          guest_phone?: string | null
+          id?: string
+          note?: string | null
+          status?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          attended?: boolean | null
+          created_at?: string | null
+          event_id?: string
+          guest_name?: string | null
+          guest_phone?: string | null
+          id?: string
+          note?: string | null
+          status?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "event_participants_event_id_fkey"
+            columns: ["event_id"]
+            isOneToOne: false
+            referencedRelation: "events"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "event_participants_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      events: {
+        Row: {
+          created_at: string | null
+          description: string | null
+          event_date: string
+          fee: number | null
+          host_id: string
+          id: string
+          location: string
+          location_url: string | null
+          max_participants: number | null
+          slug: string
+          status: string | null
+          title: string
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          description?: string | null
+          event_date: string
+          fee?: number | null
+          host_id: string
+          id?: string
+          location: string
+          location_url?: string | null
+          max_participants?: number | null
+          slug: string
+          status?: string | null
+          title: string
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          description?: string | null
+          event_date?: string
+          fee?: number | null
+          host_id?: string
+          id?: string
+          location?: string
+          location_url?: string | null
+          max_participants?: number | null
+          slug?: string
+          status?: string | null
+          title?: string
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "events_host_id_fkey"
+            columns: ["host_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       instruments: {
         Row: {
           id: number
@@ -200,8 +307,3 @@ export const Constants = {
     Enums: {},
   },
 } as const
-
-// 편의 타입 별칭
-export type Profile = Database['public']['Tables']['profiles']['Row']
-export type ProfileInsert = Database['public']['Tables']['profiles']['Insert']
-export type ProfileUpdate = Database['public']['Tables']['profiles']['Update']
