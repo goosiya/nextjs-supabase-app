@@ -8,7 +8,9 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { useState } from 'react'
-import type { Profile } from '@/types/database.types'
+import type { Tables } from '@/types/database.types'
+
+type Profile = Tables<'profiles'>
 
 interface ProfileFormProps extends React.ComponentPropsWithoutRef<'div'> {
   userId: string
