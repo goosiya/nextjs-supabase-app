@@ -2,11 +2,15 @@
   "permissions": {
     "allow": [
       "mcp__supabase",
-      "Bash(npm run build)"
+      "Bash(npm run build)",
+      "Bash(npm install:*)",
+      "Bash(npx eslint:*)",
+      "Bash(npm run type-check:*)",
+      "Bash(npx husky:*)",
+      "Bash(git add:*)",
+      "Bash(npx lint-staged:*)"
     ]
   },
   "enableAllProjectMcpServers": true,
-  "enabledMcpjsonServers": [
-    "supabase"
-  ]
+  "enabledMcpjsonServers": ["supabase"]
 }

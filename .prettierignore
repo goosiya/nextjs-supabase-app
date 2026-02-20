@@ -1,0 +1,22 @@
+# 빌드 아웃풋
+.next/
+out/
+build/
+dist/
+
+# 의존성
+node_modules/
+
+# 자동 생성 파일
+*.lock
+package-lock.json
+
+# 환경변수
+.env*
+
+# 타입 자동 생성 파일
+types/database.types.ts
+
+# 기타
+.DS_Store
+*.log
