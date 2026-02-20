@@ -8,7 +8,11 @@
       "Bash(npm run type-check:*)",
       "Bash(npx husky:*)",
       "Bash(git add:*)",
-      "Bash(npx lint-staged:*)"
+      "Bash(npx lint-staged:*)",
+      "Bash(npm run validate:*)",
+      "Bash(npm run format)",
+      "Bash(npm run lint)",
+      "Skill(git:commit)"
     ]
   },
   "enableAllProjectMcpServers": true,
