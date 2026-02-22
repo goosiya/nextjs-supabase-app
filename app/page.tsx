@@ -30,7 +30,7 @@ export default function HomePage() {
     <main className="flex min-h-screen flex-col">
       {/* 내비게이션 */}
       <nav className="flex h-16 w-full justify-center border-b border-b-foreground/10">
-        <div className="flex w-full max-w-5xl items-center justify-between px-5 text-sm">
+        <div className="flex w-full max-w-2xl items-center justify-between px-4 text-sm">
           <Link href="/" className="text-lg font-bold">
             모이자
           </Link>
@@ -48,9 +48,9 @@ export default function HomePage() {
       </nav>
 
       {/* 히어로 섹션 */}
-      <section className="flex flex-1 flex-col items-center justify-center px-4 py-24 text-center">
+      <section className="flex flex-1 flex-col items-center justify-center px-4 py-16 text-center">
         <p className="mb-3 text-sm font-medium text-primary">모임 관리가 쉬워집니다</p>
-        <h1 className="mb-4 text-4xl font-bold leading-tight tracking-tight sm:text-5xl">
+        <h1 className="mb-4 text-3xl font-bold leading-tight tracking-tight sm:text-4xl lg:text-5xl">
           링크 하나로
           <br />
           모임 공지부터 출석까지
@@ -70,8 +70,8 @@ export default function HomePage() {
       </section>
 
       {/* 기능 소개 */}
-      <section className="border-t bg-muted/30 px-4 py-16">
-        <div className="mx-auto max-w-4xl">
+      <section className="border-t bg-muted/30 px-4 py-12">
+        <div className="mx-auto max-w-2xl">
           <h2 className="mb-10 text-center text-2xl font-bold">핵심 기능</h2>
           <div className="grid gap-6 sm:grid-cols-3">
             {features.map(({ icon: Icon, title, description }) => (
