@@ -1,6 +1,12 @@
 {
   "permissions": {
-    "allow": ["mcp__supabase", "Bash", "Skill(git:commit)", "mcp__shrimp-task-manager"]
+    "allow": [
+      "mcp__supabase",
+      "Bash",
+      "Skill(git:commit)",
+      "mcp__shrimp-task-manager",
+      "mcp__playwright"
+    ]
   },
   "enableAllProjectMcpServers": true,
   "enabledMcpjsonServers": ["supabase"]
